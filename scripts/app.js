@@ -13,53 +13,8 @@ const cellCount = width * width;
 
 // * GAME VARIABLES GO HERE ===============================================================================================================================================================
 let frogPosition = 94;
-// let goalPosition1 = 4;
-// let goalPosition2 = 5;
 
-// * road variables to be refactored =================================================================================================================================================================================
-let roadBottom1 = 79;
-let roadBottom2 = 78;
-let roadBottom3 = 77;
-let roadBottom4 = 76;
-let roadBottom5 = 75;
-let roadBottom6 = 74;
-let roadBottom7 = 73;
-let roadBottom8 = 72;
-let roadBottom9 = 71;
-let roadBottom10 = 70;
-let roadTop1 = 60;
-let roadTop2 = 61;
-let roadTop3 = 62;
-let roadTop4 = 63;
-let roadTop5 = 64;
-let roadTop6 = 65;
-let roadTop7 = 66;
-let roadTop8 = 67;
-let roadTop9 = 68;
-let roadTop10 = 69;
-
-// * water variables to be refactored ===========================================================================================================================================================================
-let waterBottom1 = 39;
-let waterBottom2 = 38;
-let waterBottom3 = 37;
-let waterBottom4 = 36;
-let waterBottom5 = 35;
-let waterBottom6 = 34;
-let waterBottom7 = 33;
-let waterBottom8 = 32;
-let waterBottom9 = 31;
-let waterBottom10 = 30;
-let waterTop1 = 20;
-let waterTop2 = 21;
-let waterTop3 = 22;
-let waterTop4 = 23;
-let waterTop5 = 24;
-let waterTop6 = 25;
-let waterTop7 = 26;
-let waterTop8 = 27;
-let waterTop9 = 28;
-let waterTop10 = 29;
-// * GRID CREATION GOES HERE ====================================================================================================================================================================
+// * GRID CREATION GOES HERE ==========================================================================================================================================================================
 
 for (let i = 0; i < cellCount; i++) {
   const cell = document.createElement('div');
@@ -73,7 +28,12 @@ const carsRight = [62, 65, 68];
 const logsLeft = [30, 31, 33, 34, 36, 37];
 const logsRight = [21, 22, 24, 25, 27, 28];
 const finishLine = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-// *  FUNCTIONS ===========================================================================================================================================================================
+const roadTop = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69];
+const roadBottom = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79];
+const waterTop = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+const waterBottom = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+
+// *  FUNCTIONS =======================================================================================================================================================================================
 function addGoal() {
   // cells[goalPosition1].classList.add('goal');
   // cells[goalPosition2].classList.add('goal');
@@ -83,7 +43,6 @@ function addGoal() {
 }
 
 // ADDS FROG TO GRID
-
 function addFrog() {
   cells[frogPosition].classList.add('frog'); //adds frog to grid
 }
@@ -185,9 +144,38 @@ function moveLogsRight() {
   }
   placeLogsRight(); //places log in desired location
 }
+function addRoadBottom() {
+  for (let i = 0; i < roadBottom.length; i++) {
+    cells[roadBottom[i]].classList.add('road-bottom');
+  }
+}
+
+function addRoadTop() {
+  for (let i = 0; i < roadTop.length; i++) {
+    cells[roadTop[i]].classList.add('road-top');
+  }
+}
+
+function addWaterBottom() {
+  for (let i = 0; i < waterBottom.length; i++) {
+    cells[waterBottom[i]].classList.add('water-bottom');
+  }
+}
+function addWaterTop() {
+  for (let i = 0; i < waterTop.length; i++) {
+    cells[waterTop[i]].classList.add('water-top');
+  }
+}
+
+//* WIN AND LOSE FUNCTIONS
+// function win() {
+//   if (cells[finishLine[i].classList.contains('frog')) {
+//     result.innerHTML = 'YOU WIN!';
+//     cells[finishLine[i].classList.remove('frog');
+//   }
+// }
 
 //* LOOP TO MOVE CARS AND LOGS AUTOMATICALLY
-
 setInterval(() => {
   moveLogsLeft();
   moveLogsRight();
@@ -195,79 +183,7 @@ setInterval(() => {
   moveCarsLeft();
 }, 1000);
 
-//* WIN AND LOSE FUNCTIONS
-function win() {
-  if (cells[finishLine[i]].classList.contains('frog')) {
-    result.innerHTML = 'YOU WIN!';
-    cells[finishLine[i]].classList.remove('frog');
-  }
-}
-
-// FUNCTIONS THAT NEED TO BE REFACTORED AT A LATER DATE
-function addRoadBottom() {
-  cells[roadBottom1].classList.add('road-bottom');
-  cells[roadBottom2].classList.add('road-bottom');
-  cells[roadBottom3].classList.add('road-bottom');
-  cells[roadBottom4].classList.add('road-bottom');
-  cells[roadBottom5].classList.add('road-bottom');
-  cells[roadBottom6].classList.add('road-bottom');
-  cells[roadBottom7].classList.add('road-bottom');
-  cells[roadBottom8].classList.add('road-bottom');
-  cells[roadBottom9].classList.add('road-bottom');
-  cells[roadBottom10].classList.add('road-bottom');
-}
-
-function addRoadTop() {
-  cells[roadTop1].classList.add('road-top');
-  cells[roadTop2].classList.add('road-top');
-  cells[roadTop3].classList.add('road-top');
-  cells[roadTop4].classList.add('road-top');
-  cells[roadTop5].classList.add('road-top');
-  cells[roadTop6].classList.add('road-top');
-  cells[roadTop7].classList.add('road-top');
-  cells[roadTop8].classList.add('road-top');
-  cells[roadTop9].classList.add('road-top');
-  cells[roadTop10].classList.add('road-top');
-}
-
-function addWaterBottom() {
-  cells[waterBottom1].classList.add('water-bottom');
-  cells[waterBottom2].classList.add('water-bottom');
-  cells[waterBottom3].classList.add('water-bottom');
-  cells[waterBottom4].classList.add('water-bottom');
-  cells[waterBottom5].classList.add('water-bottom');
-  cells[waterBottom6].classList.add('water-bottom');
-  cells[waterBottom7].classList.add('water-bottom');
-  cells[waterBottom8].classList.add('water-bottom');
-  cells[waterBottom9].classList.add('water-bottom');
-  cells[waterBottom10].classList.add('water-bottom');
-}
-function addWaterTop() {
-  cells[waterTop1].classList.add('water-top');
-  cells[waterTop2].classList.add('water-top');
-  cells[waterTop3].classList.add('water-top');
-  cells[waterTop4].classList.add('water-top');
-  cells[waterTop5].classList.add('water-top');
-  cells[waterTop6].classList.add('water-top');
-  cells[waterTop7].classList.add('water-top');
-  cells[waterTop8].classList.add('water-top');
-  cells[waterTop9].classList.add('water-top');
-  cells[waterTop10].classList.add('water-top');
-}
-// CALLBACK FUNCTIONS TO THE GRID
-placeCarsRight();
-placeCarsLeft();
-addFrog();
-placeLogsLeft();
-placeLogsRight();
-addWaterBottom();
-addWaterTop();
-addRoadBottom();
-addRoadTop();
-addGoal();
-
-//* FUNCTION THAT WILL MOVE THE PLAYER
-
+//* FUNCTION THAT WILL MOVE THE PLAYER ================================================================================================================================================================================================
 function handleKeyUp(event) {
   removeFrog(frogPosition); // * removes frog from current position
 
@@ -292,8 +208,19 @@ function handleKeyUp(event) {
   }
 
   addFrog(frogPosition); // * adds frog back at the new position
-  win();
+  //win();
 }
+// CALLBACK FUNCTIONS TO THE GRID
+placeCarsRight();
+placeCarsLeft();
+addFrog();
+placeLogsLeft();
+placeLogsRight();
+addWaterBottom();
+addWaterTop();
+addRoadBottom();
+addRoadTop();
+addGoal();
 
 // EVENT LISTENERS
 document.addEventListener('keyup', handleKeyUp);
