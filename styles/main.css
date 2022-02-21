@@ -31,6 +31,19 @@ body {
   height: 10%;
   width: 10%;
 }
+.grid div.road-bottom {
+  background-color: #6c7278;
+}
+.grid div.road-top {
+  background-color: #6c7278;
+}
+
+.grid div.water-bottom {
+  background-color: #00bbfff9;
+}
+.grid div.water-top {
+  background-color: #00bbfff9;
+}
 
 .grid div.car-left {
   background-color: #d8f710;
@@ -39,18 +52,14 @@ body {
 .grid div.car-right {
   background-color: #d82ceb;
 }
-.grid div.road {
-  background-color: #6c7278;
-}
+
 .grid div.lillipad-left {
   background-color: #4fd54f7b;
 }
 .grid div.lillipad-right {
   background-color: #4fd54f7b;
 }
-.grid div.water {
-  background-color: #00bbfff9;
-}
+
 .grid div.goal {
   background-color: #ffea00;
 }
