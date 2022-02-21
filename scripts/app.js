@@ -13,8 +13,8 @@ const cellCount = width * width;
 
 // * GAME VARIABLES GO HERE ===============================================================================================================================================================
 let frogPosition = 94;
-let goalPosition1 = 4;
-let goalPosition2 = 5;
+// let goalPosition1 = 4;
+// let goalPosition2 = 5;
 
 // * road variables to be refactored =================================================================================================================================================================================
 let roadBottom1 = 79;
@@ -72,84 +72,138 @@ const carsLeft = [72, 75, 78];
 const carsRight = [62, 65, 68];
 const logsLeft = [30, 31, 33, 34, 36, 37];
 const logsRight = [21, 22, 24, 25, 27, 28];
+const finishLine = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 // *  FUNCTIONS ===========================================================================================================================================================================
 function addGoal() {
-  cells[goalPosition1].classList.add('goal');
-  cells[goalPosition2].classList.add('goal');
+  // cells[goalPosition1].classList.add('goal');
+  // cells[goalPosition2].classList.add('goal');
+  for (let i = 0; i < finishLine.length; i++) {
+    cells[finishLine[i]].classList.add('goal');
+  }
 }
+
+// ADDS FROG TO GRID
 
 function addFrog() {
   cells[frogPosition].classList.add('frog'); //adds frog to grid
 }
-
+// REMOVES FROG FROM GRID
 function removeFrog() {
   cells[frogPosition].classList.remove('frog'); //removes frog from grid
 }
+
+//* ADDS CARS TO TRAVEL LEFT ON GRID
 function placeCarsLeft() {
   for (let i = 0; i < carsLeft.length; i++) {
     cells[carsLeft[i]].classList.add('car-left');
   }
 }
-
+//* REMOVES CARS TO TRAVEL LEFT ON GRID
+function removeCarsLeft() {
+  for (let i = 0; i < carsLeft.length; i++) {
+    cells[carsLeft[i]].classList.remove('car-left');
+  }
+}
+//* ADDS CARS TO TRAVEL RIGHT ON GRID
 function placeCarsRight() {
   for (let i = 0; i < carsRight.length; i++) {
     cells[carsRight[i]].classList.add('car-right');
   }
 }
-
+//* REMOVES CARS TO TRAVEL RIGHT ON GRID
+function removeCarsRight() {
+  for (let i = 0; i < carsRight.length; i++) {
+    cells[carsRight[i]].classList.remove('car-right');
+  }
+}
+//* ADDS LOGS TO TRAVEL LEFT ON GRID
 function placeLogsLeft() {
   for (let i = 0; i < logsLeft.length; i++) {
     cells[logsLeft[i]].classList.add('logs-left');
   }
 }
-
+//* REMOVES LOGS TO TRAVEL LEFT ON GRID
+function removeLogsLeft() {
+  for (let i = 0; i < logsLeft.length; i++) {
+    cells[logsLeft[i]].classList.remove('logs-left');
+  }
+}
+//* ADDS LOGS TO TRAVEL RIGHT ON GRID
 function placeLogsRight() {
   for (let i = 0; i < logsRight.length; i++) {
     cells[logsRight[i]].classList.add('logs-right');
   }
 }
+//* REMOVES LOGS TO TRAVEL RIGHT ON GRID
+function removeLogsRight() {
+  for (let i = 0; i < logsRight.length; i++) {
+    cells[logsRight[i]].classList.remove('logs-right');
+  }
+}
 
-function moveCarLeft() {
+//* MOVES CARS TO THE LEFT ONE SPACE
+function moveCarsLeft() {
+  removeCarsLeft(); //removes car from grid
   for (let i = 0; i < carsLeft.length; i++) {
-    carsLeft[i]--;
+    if (carsLeft[i] % 10 !== 0) carsLeft[i]--;
+    else {
+      carsLeft[i] += 9;
+    }
   }
+  placeCarsLeft(); //places car in desired loaction
 }
-
-function moveCarRight() {
+//* MOVES CARS TO THE RIGHT ONE SPACE
+function moveCarsRight() {
+  removeCarsRight(); //removes car from grid
   for (let i = 0; i < carsRight.length; i++) {
-    carsRight[i]++;
+    if (carsRight[i] % 10 !== 9) carsRight[i]++;
+    else {
+      carsRight[i] -= 9;
+    }
   }
+  placeCarsRight(); // places car in desired location
 }
-
+//* MOVES LOGS TO THE LEFT ONE SPACE
 function moveLogsLeft() {
+  removeLogsLeft(); // removes log from grid
   for (let i = 0; i < logsLeft.length; i++) {
     if (logsLeft[i] % 10 !== 0) logsLeft[i]--;
     else {
       logsLeft[i] += 9;
     }
   }
+  placeLogsLeft(); // places log in desired location
+}
+//* MOVES LOGS TO THE RIGHT ONE SPACE
+function moveLogsRight() {
+  removeLogsRight(); //removes log from grid
+  for (let i = 0; i < logsRight.length; i++) {
+    if (logsRight[i] % 10 !== 9) logsRight[i]++;
+    else {
+      logsRight[i] -= 9;
+    }
+  }
+  placeLogsRight(); //places log in desired location
 }
 
-function moveLogsRight() {
-  for (let i = 0; i < logsRight.length; i++) {
-    logsRight[i]++;
+//* LOOP TO MOVE CARS AND LOGS AUTOMATICALLY
+
+setInterval(() => {
+  moveLogsLeft();
+  moveLogsRight();
+  moveCarsRight();
+  moveCarsLeft();
+}, 1000);
+
+//* WIN AND LOSE FUNCTIONS
+function win() {
+  if (cells[finishLine[i]].classList.contains('frog')) {
+    result.innerHTML = 'YOU WIN!';
+    cells[finishLine[i]].classList.remove('frog');
   }
 }
 
-//moveLogsRight()
-// moveLogsLeft();
-// moveCarLeft();
-// moveCarRight();
-function move() {
-  //setInterval()
-  setInterval(() => {
-    console.log(moveLogsLeft);
-    moveLogsLeft();
-  }, 1000);
-}
-
-move();
-// FUNCTIONS THAT NEED TO BE REFACT ORED AT A LATER DATE
+// FUNCTIONS THAT NEED TO BE REFACTORED AT A LATER DATE
 function addRoadBottom() {
   cells[roadBottom1].classList.add('road-bottom');
   cells[roadBottom2].classList.add('road-bottom');
@@ -200,7 +254,7 @@ function addWaterTop() {
   cells[waterTop9].classList.add('water-top');
   cells[waterTop10].classList.add('water-top');
 }
-
+// CALLBACK FUNCTIONS TO THE GRID
 placeCarsRight();
 placeCarsLeft();
 addFrog();
@@ -211,6 +265,8 @@ addWaterTop();
 addRoadBottom();
 addRoadTop();
 addGoal();
+
+//* FUNCTION THAT WILL MOVE THE PLAYER
 
 function handleKeyUp(event) {
   removeFrog(frogPosition); // * removes frog from current position
@@ -236,6 +292,8 @@ function handleKeyUp(event) {
   }
 
   addFrog(frogPosition); // * adds frog back at the new position
+  win();
 }
 
+// EVENT LISTENERS
 document.addEventListener('keyup', handleKeyUp);
