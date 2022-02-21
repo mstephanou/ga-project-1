@@ -5,6 +5,7 @@
 body {
   height: 100vh;
   margin: 0;
+  background-color: #0a570af3;
 }
 
 .grid-wrapper {
@@ -16,7 +17,7 @@ body {
 
 .grid {
   align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -53,11 +54,11 @@ body {
   background-color: #d82ceb;
 }
 
-.grid div.lillipad-left {
-  background-color: #4fd54f7b;
+.grid div.logs-left {
+  background-color: #592c05bb;
 }
-.grid div.lillipad-right {
-  background-color: #4fd54f7b;
+.grid div.logs-right {
+  background-color: #592c05bb;
 }
 
 .grid div.goal {
