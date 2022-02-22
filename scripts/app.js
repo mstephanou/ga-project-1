@@ -1,11 +1,9 @@
 // * DOM ELEMENTS GO HERE ======================================================================================================================================================================
-const button = document.querySelector('#button');
-const result = document.querySelector('#result');
+const startButton = document.querySelector('#start-button');
+const gameResult = document.querySelector('#result');
 const grid = document.querySelector('.grid');
-
-//const gridBoxes = Array.from(document.querySelectorAll('.grid div'));
+let hasGameStarted = false;
 const cells = [];
-// let direction = 1;
 
 // * GRID VARIABLES GO HERE ===============================================================================================================================================================
 const width = 10;
@@ -35,8 +33,6 @@ const waterBottom = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
 
 // *  FUNCTIONS =======================================================================================================================================================================================
 function addGoal() {
-  // cells[goalPosition1].classList.add('goal');
-  // cells[goalPosition2].classList.add('goal');
   for (let i = 0; i < finishLine.length; i++) {
     cells[finishLine[i]].classList.add('goal');
   }
@@ -109,7 +105,7 @@ function moveCarsLeft() {
       carsLeft[i] += 9;
     }
   }
-  placeCarsLeft(); //places car in desired loaction
+  placeCarsLeft(); //places car in new location
 }
 //* MOVES CARS TO THE RIGHT ONE SPACE
 function moveCarsRight() {
@@ -120,7 +116,7 @@ function moveCarsRight() {
       carsRight[i] -= 9;
     }
   }
-  placeCarsRight(); // places car in desired location
+  placeCarsRight(); // places car in new location
 }
 //* MOVES LOGS TO THE LEFT ONE SPACE
 function moveLogsLeft() {
@@ -131,7 +127,7 @@ function moveLogsLeft() {
       logsLeft[i] += 9;
     }
   }
-  placeLogsLeft(); // places log in desired location
+  placeLogsLeft(); // places log in new location
 }
 //* MOVES LOGS TO THE RIGHT ONE SPACE
 function moveLogsRight() {
@@ -142,8 +138,10 @@ function moveLogsRight() {
       logsRight[i] -= 9;
     }
   }
-  placeLogsRight(); //places log in desired location
+  placeLogsRight(); //places log in new location
 }
+
+//* PLACE ITEMS ON THE GRID
 function addRoadBottom() {
   for (let i = 0; i < roadBottom.length; i++) {
     cells[roadBottom[i]].classList.add('road-bottom');
@@ -167,23 +165,44 @@ function addWaterTop() {
   }
 }
 
-//* WIN AND LOSE FUNCTIONS
-// function win() {
-//   if (cells[finishLine[i].classList.contains('frog')) {
-//     result.innerHTML = 'YOU WIN!';
-//     cells[finishLine[i].classList.remove('frog');
-//   }
-// }
+//* WIN/LOSE CONDITIONS ========================================================================================================================================================================================================================================================================================================================================
+function win() {
+  if (cells[frogPosition].classList.contains('goal')) {
+    gameResult.innerHTML = 'YOU WIN!';
+    cells[frogPosition].classList.remove('frog');
+    clearInterval(handleStartGame);
+    document.removeEventListener('keyup', handleKeyUp);
+  }
+}
 
-//* LOOP TO MOVE CARS AND LOGS AUTOMATICALLY
-setInterval(() => {
-  moveLogsLeft();
-  moveLogsRight();
-  moveCarsRight();
-  moveCarsLeft();
-}, 1000);
+function lose() {
+  if (
+    cells[frogPosition].classList.contains('car-left') ||
+    cells[frogPosition].classList.contains('car-right') ||
+    (!cells[frogPosition].classList.contains('logs-right') &&
+      cells[frogPosition].classList.contains('water-top')) ||
+    (!cells[frogPosition].classList.contains('logs-left') &&
+      cells[frogPosition].classList.contains('water-bottom'))
+  ) {
+    gameResult.innerHTML = 'YOU LOSE!';
+    cells[frogPosition].classList.remove('frog');
+    clearInterval(handleStartGame);
+    document.removeEventListener('keyup', handleKeyUp);
+    frogPosition = 94;
+    handleStartGame;
+  }
+}
+// * START GAME FUNCTION ===========================================================================================================================================================================================================================================================
+function startGame() {
+  if (hasGameStarted) {
+    moveLogsLeft();
+    moveLogsRight();
+    moveCarsRight();
+    moveCarsLeft();
+  }
+}
 
-//* FUNCTION THAT WILL MOVE THE PLAYER ================================================================================================================================================================================================
+//* FUNCTION THAT WILL MOVE THE PLAYER ============================================================================================================================================================================================================================================
 function handleKeyUp(event) {
   removeFrog(frogPosition); // * removes frog from current position
 
@@ -193,24 +212,31 @@ function handleKeyUp(event) {
   switch (event.keyCode) {
     case 39:
       if (x < width - 1) frogPosition++;
+      win();
+      lose();
       break;
     case 37:
       if (x > 0) frogPosition--;
+      win();
+      lose();
       break;
     case 38:
       if (y > 0) frogPosition -= width;
+      win();
+      lose();
       break;
     case 40:
       if (y < width - 1) frogPosition += width;
+      win();
+      lose();
       break;
     default:
       console.log('INVALID KEY');
   }
 
   addFrog(frogPosition); // * adds frog back at the new position
-  //win();
 }
-// CALLBACK FUNCTIONS TO THE GRID
+// CALLBACK FUNCTIONS THAT ADD ITEMS TO THE GRID
 placeCarsRight();
 placeCarsLeft();
 addFrog();
@@ -224,3 +250,13 @@ addGoal();
 
 // EVENT LISTENERS
 document.addEventListener('keyup', handleKeyUp);
+
+startButton.addEventListener('click', () => {
+  startButton.remove();
+  hasGameStarted = true;
+  handleStartGame;
+});
+
+//* ALL MOVING PARTS GO HERE
+
+const handleStartGame = setInterval(startGame, 1000);

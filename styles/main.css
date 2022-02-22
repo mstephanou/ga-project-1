@@ -1,11 +1,12 @@
 * {
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 body {
   height: 100vh;
   margin: 0;
-  background-color: #0a570af3;
+  background-color: #026502f3;
 }
 
 .grid-wrapper {
@@ -13,6 +14,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+button {
+  border: 1px solid #00ff00;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 5px;
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  z-index: 1;
+}
+
+#start-button {
+  font-family: sans-serif;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+#result {
+  position: absolute;
+  top: 90%;
+  left: 43%;
+  color: #fff;
+  font-size: 2em;
 }
 
 .grid {

@@ -12,3 +12,8 @@ Frogger is a game where the player - _a frog_ - starts at the bottom of the grid
 Please find attached my whiteboard mock-up of how i plan to build this game, utilising the skills i have learned so far.
 
 ![project 1 whiteboard](./project-1-whiteboard.png)
+
+<a href="https://www.flaticon.com/free-icons/frog" title="frog icons">Frog icons created by Freepik - Flaticon</a>
+
+Background music from PlayOnLoop.com
+Licensed under Creative Commons by Attribution 4.0
