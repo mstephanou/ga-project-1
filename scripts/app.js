@@ -1,6 +1,8 @@
 // * DOM ELEMENTS GO HERE ======================================================================================================================================================================
 const startButton = document.querySelector('#start-button');
+const resetButton = document.querySelector('#reset');
 const gameResult = document.querySelector('#result');
+const timer = document.querySelector('#timer');
 const grid = document.querySelector('.grid');
 let hasGameStarted = false;
 const cells = [];
@@ -8,15 +10,17 @@ const cells = [];
 // * GRID VARIABLES GO HERE ===============================================================================================================================================================
 const width = 10;
 const cellCount = width * width;
+let intervalID;
 
 // * GAME VARIABLES GO HERE ===============================================================================================================================================================
 let frogPosition = 94;
+let time = parseInt(timer.innerText);
 
 // * GRID CREATION GOES HERE ==========================================================================================================================================================================
 
 for (let i = 0; i < cellCount; i++) {
   const cell = document.createElement('div');
-  cell.textContent = i;
+  //cell.textContent = i;
   grid.appendChild(cell);
   cells.push(cell);
 }
@@ -38,11 +42,11 @@ function addGoal() {
   }
 }
 
-// ADDS FROG TO GRID
+//* ADDS FROG TO GRID
 function addFrog() {
   cells[frogPosition].classList.add('frog'); //adds frog to grid
 }
-// REMOVES FROG FROM GRID
+//* REMOVES FROG FROM GRID
 function removeFrog() {
   cells[frogPosition].classList.remove('frog'); //removes frog from grid
 }
@@ -170,7 +174,7 @@ function win() {
   if (cells[frogPosition].classList.contains('goal')) {
     gameResult.innerHTML = 'YOU WIN!';
     cells[frogPosition].classList.remove('frog');
-    clearInterval(handleStartGame);
+    clearInterval(intervalID);
     document.removeEventListener('keyup', handleKeyUp);
   }
 }
@@ -182,27 +186,43 @@ function lose() {
     (!cells[frogPosition].classList.contains('logs-right') &&
       cells[frogPosition].classList.contains('water-top')) ||
     (!cells[frogPosition].classList.contains('logs-left') &&
-      cells[frogPosition].classList.contains('water-bottom'))
+      cells[frogPosition].classList.contains('water-bottom')) ||
+    time <= 0
   ) {
     gameResult.innerHTML = 'YOU LOSE!';
     cells[frogPosition].classList.remove('frog');
-    clearInterval(handleStartGame);
+    clearInterval(intervalID);
     document.removeEventListener('keyup', handleKeyUp);
     frogPosition = 94;
-    handleStartGame;
+    resetButton;
   }
 }
-// * START GAME FUNCTION ===========================================================================================================================================================================================================================================================
+//* FUNCTION THAT HANDLES COUNTDOWN TIMER ==========================================================================================================================================================================================================================================================
+function startTimer() {
+  if (time <= 0) {
+    return;
+  }
+  time--;
+  timer.innerText = time;
+}
+// * START & RESET GAME FUNCTIONS ===========================================================================================================================================================================================================================================================
 function startGame() {
   if (hasGameStarted) {
     moveLogsLeft();
     moveLogsRight();
     moveCarsRight();
     moveCarsLeft();
+    startTimer();
+    win();
+    lose();
   }
 }
 
-//* FUNCTION THAT WILL MOVE THE PLAYER ============================================================================================================================================================================================================================================
+function resetGame() {
+  window.location.reload();
+}
+
+//* FUNCTION THAT WILL MOVE THE FROG AND ALSO CHECK WIN/LOSE CONDITION ON EACH NEW KEY PRESS ============================================================================================================================================================================================================================================
 function handleKeyUp(event) {
   removeFrog(frogPosition); // * removes frog from current position
 
@@ -233,30 +253,34 @@ function handleKeyUp(event) {
     default:
       console.log('INVALID KEY');
   }
-
   addFrog(frogPosition); // * adds frog back at the new position
 }
-// CALLBACK FUNCTIONS THAT ADD ITEMS TO THE GRID
-placeCarsRight();
-placeCarsLeft();
-addFrog();
-placeLogsLeft();
-placeLogsRight();
-addWaterBottom();
-addWaterTop();
-addRoadBottom();
-addRoadTop();
-addGoal();
 
-// EVENT LISTENERS
-document.addEventListener('keyup', handleKeyUp);
-
+//* FUNCTION THAT WILL HANDLE START GAME BUTTON ================================================================================================================
 startButton.addEventListener('click', () => {
   startButton.remove();
   hasGameStarted = true;
-  handleStartGame;
+  intervalID = setInterval(startGame, 1000);
 });
 
-//* ALL MOVING PARTS GO HERE
+resetButton.addEventListener('click', () => {
+  resetGame();
+});
 
-const handleStartGame = setInterval(startGame, 1000);
+//* EVENT LISTENER FOR MOVE FROG
+document.addEventListener('keyup', handleKeyUp);
+
+//* FUNCTION THAT HANDLES CALLBACKS FOR ALL NON-MOVING GRID ITEMS
+function placeGridItems() {
+  placeCarsRight();
+  placeCarsLeft();
+  addFrog();
+  placeLogsLeft();
+  placeLogsRight();
+  addWaterBottom();
+  addWaterTop();
+  addRoadBottom();
+  addRoadTop();
+  addGoal();
+}
+placeGridItems();

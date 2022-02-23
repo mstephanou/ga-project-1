@@ -6,7 +6,19 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: #026502f3;
+}
+h3 {
+  font-family: sans-serif;
+  color: #fff;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#57df45, #f5f384);
+  height: 100%;
 }
 
 .grid-wrapper {
@@ -14,31 +26,47 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 button {
-  border: 1px solid #00ff00;
-  background: #fff;
+  font-family: sans-serif;
+  border: 3px solid #57df45;
+  background-color: #e5e491;
+  color: #57df45;
   border-radius: 1rem;
-  padding: 5px;
-  position: absolute;
-  top: 5%;
-  left: 45%;
+  padding: 10px;
   z-index: 1;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+button:hover {
+  border: 5px solid #e5e491;
+  background-color: #57df45;
+  color: #e5e491;
+}
+
+#timer {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #fff;
+  font-size: larger;
 }
 
 #start-button {
   font-family: sans-serif;
+  font-weight: bold;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 10px;
 }
 
 #result {
-  position: absolute;
-  top: 90%;
-  left: 43%;
-  color: #fff;
+  color: #57df45;
   font-size: 2em;
+  margin-bottom: 30px;
 }
 
 .grid {
@@ -53,43 +81,66 @@ button {
 }
 
 .grid div {
-  border: 1px solid lightgray;
+  /*border: 1px solid lightgray;*/
   flex-grow: 1;
   height: 10%;
   width: 10%;
 }
 .grid div.road-bottom {
-  background-color: #6c7278;
+  background-color: #3f4654;
+  background-image: url('../assets/road.png');
+  background-size: cover;
 }
 .grid div.road-top {
-  background-color: #6c7278;
+  background-color: #3f4654;
+  background-image: url('../assets/road.png');
+  background-size: cover;
 }
 
 .grid div.water-bottom {
   background-color: #00bbfff9;
+  background-image: url('../assets/waves.png');
+  background-size: cover;
 }
 .grid div.water-top {
   background-color: #00bbfff9;
+  background-image: url('../assets/waves.png');
+  background-size: cover;
 }
 
 .grid div.car-left {
-  background-color: #d8f710;
+  background-color: #3f4654;
+  background-image: url('../assets/car-red.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .grid div.car-right {
-  background-color: #eb2c2c;
+  background-color: #3f4654;
+  background-image: url('../assets/car-yellow.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .grid div.logs-left {
-  background-color: #592c05bb;
+  /*background-color: #592c05bb;*/
+  background-image: url('../assets/wood.png');
+  background-size: cover;
 }
 .grid div.logs-right {
-  background-color: #592c05bb;
+  /*background-color: #592c05bb;*/
+  background-image: url('../assets/wood.png');
+  background-size: cover;
 }
 
 .grid div.goal {
-  background-color: #ffea00;
+  /*background-color: #ffea00;*/
+  background-image: url('../assets/reeds.png');
+  background-size: cover;
 }
 .grid div.frog {
-  background-color: #05c605;
+  /*background-color: #05c605;*/
+  background-image: url('../assets/frog.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
