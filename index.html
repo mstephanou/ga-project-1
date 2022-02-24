@@ -9,30 +9,36 @@
     <title>Project 1</title>
   </head>
   <body>
-    <audio id="audio" src="./assets/POL-mad-chase-short.wav"></audio>
+    <audio id="audio" src="./assets/POL-kart-champion-short.wav"></audio>
     <audio id="audio2" src="./assets/14706_1460054338.wav"></audio>
-
+    <audio id="win"src="./assets/mixkit-completion-of-a-level-2063.wav"></audio>
+    <audio id="lose"src="./assets/mixkit-player-losing-or-failing-2042.wav"></audio>
     <div class="game-container">
-      <h3>TIME REMAINING:<span id="timer"> 10</span></h3>
+       <h3>TIME REMAINING:<span id="timer"> 15</span></h3>
+      <h3 id="result"></h3>
+      <div class="grid-and-rules">
       <div class="grid-wrapper">
+        <div class="grid"></div>
+        <div class="button-wrapper">
+          <button id="start-button">START GAME</button>
+          <button id="reset">RESET GAME</button>
+        </div>
+      </div>
+      <div class="rules">
         <p>
-        Rules: <br />
-        Cross the road and don't get run over! <br />
-        Use the logs to cross the river! <br /> </p>
-        <p>
-        Controls: <br /> Upkey = Up <br />
+        RULES: <br />
+        1. Cross the road and don't get run over! <br />
+        2. Use the logs to cross the river! <br /> </p>
+        <p class="controls">
+        CONTROLS: <br /> Upkey = Up <br />
         Downkey = Down <br />
         Leftkey = Left <br />
         Rightkey = Right <br />
         </p>
-        <div class="grid"></div>
       </div>
-      
-        <button id="start-button">START GAME</button>
-        <button id="reset">RESET GAME</button>
+     </div>
       </p>
-
-      <h3 id="result"></h3>
+      
     </div>
     <script src="./scripts/app.js"></script>
   </body>

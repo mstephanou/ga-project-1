@@ -20,6 +20,8 @@ Please find attached my whiteboard mock-up of how i plan to build this game, uti
 <a href="https://www.flaticon.com/free-icons/wood" title="wood icons">Wood icons created by Good Ware - Flaticon</a><br>
 <a href="https://www.flaticon.com/free-icons/car" title="car icons">Car icons created by vectorsmarket15 - Flaticon</a><br>
 <a href="https://www.flaticon.com/free-icons/car" title="car icons">Car icons created by Vectors Market - Flaticon</a><br>
+<a href="https://www.flaticon.com/free-icons/bus" title="bus icons">Bus icons created by DinosoftLabs - Flaticon</a><br>
+<a href="https://www.flaticon.com/free-icons/truck" title="truck icons">Truck icons created by BZZRINCANTATION - Flaticon</a><br>
 <a href="https://www.flaticon.com/free-icons/grass" title="grass icons">Grass icons created by Freepik - Flaticon</a><br>
 
 Background music from PlayOnLoop.com

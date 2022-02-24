@@ -8,7 +8,8 @@ const gameResult = document.querySelector('#result');
 const timer = document.querySelector('#timer');
 let myAudio = document.querySelector('#audio');
 let ribbit = document.querySelector('#audio2');
-
+let winAudio = document.querySelector('#win');
+let loseAudio = document.querySelector('#lose');
 // * GRID VARIABLES GO HERE ===============================================================================================================================================================
 const width = 10;
 const cellCount = width * width;
@@ -28,12 +29,16 @@ for (let i = 0; i < cellCount; i++) {
 }
 // * ARRAYS GO HERE ==================================================================================================================================================================================
 const carsLeft = [72, 75, 78];
+const carsLeft2 = [52, 55, 58];
 const carsRight = [62, 65, 68];
+const carsRight2 = [82, 85, 88];
 const logsLeft = [30, 31, 33, 34, 36, 37];
 const logsRight = [21, 22, 24, 25, 27, 28];
 const finishLine = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const roadTop = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69];
 const roadBottom = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79];
+const roadTop2 = [50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
+const roadBottom2 = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89];
 const waterTop = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 const waterBottom = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
 
@@ -59,10 +64,20 @@ function placeCarsLeft() {
     cells[carsLeft[i]].classList.add('car-left');
   }
 }
+function placeCarsLeft2() {
+  for (let i = 0; i < carsLeft2.length; i++) {
+    cells[carsLeft2[i]].classList.add('car-left2');
+  }
+}
 //* REMOVES CARS TO TRAVEL LEFT ON GRID
 function removeCarsLeft() {
   for (let i = 0; i < carsLeft.length; i++) {
     cells[carsLeft[i]].classList.remove('car-left');
+  }
+}
+function removeCarsLeft2() {
+  for (let i = 0; i < carsLeft2.length; i++) {
+    cells[carsLeft2[i]].classList.remove('car-left2');
   }
 }
 //* ADDS CARS TO TRAVEL RIGHT ON GRID
@@ -71,10 +86,20 @@ function placeCarsRight() {
     cells[carsRight[i]].classList.add('car-right');
   }
 }
+function placeCarsRight2() {
+  for (let i = 0; i < carsRight2.length; i++) {
+    cells[carsRight2[i]].classList.add('car-right2');
+  }
+}
 //* REMOVES CARS TO TRAVEL RIGHT ON GRID
 function removeCarsRight() {
   for (let i = 0; i < carsRight.length; i++) {
     cells[carsRight[i]].classList.remove('car-right');
+  }
+}
+function removeCarsRight2() {
+  for (let i = 0; i < carsRight2.length; i++) {
+    cells[carsRight2[i]].classList.remove('car-right2');
   }
 }
 //* ADDS LOGS TO TRAVEL LEFT ON GRID
@@ -113,6 +138,16 @@ function moveCarsLeft() {
   }
   placeCarsLeft(); //places car in new location
 }
+function moveCarsLeft2() {
+  removeCarsLeft2(); //removes car from grid
+  for (let i = 0; i < carsLeft2.length; i++) {
+    if (carsLeft2[i] % 10 !== 0) carsLeft2[i]--;
+    else {
+      carsLeft2[i] += 9;
+    }
+  }
+  placeCarsLeft2(); //places car in new location
+}
 //* MOVES CARS TO THE RIGHT ONE SPACE
 function moveCarsRight() {
   removeCarsRight(); //removes car from grid
@@ -123,6 +158,16 @@ function moveCarsRight() {
     }
   }
   placeCarsRight(); // places car in new location
+}
+function moveCarsRight2() {
+  removeCarsRight2(); //removes car from grid
+  for (let i = 0; i < carsRight2.length; i++) {
+    if (carsRight2[i] % 10 !== 9) carsRight2[i]++;
+    else {
+      carsRight2[i] -= 9;
+    }
+  }
+  placeCarsRight2(); // places car in new location
 }
 //* MOVES LOGS TO THE LEFT ONE SPACE
 function moveLogsLeft() {
@@ -153,10 +198,20 @@ function addRoadBottom() {
     cells[roadBottom[i]].classList.add('road-bottom');
   }
 }
+function addRoadBottom2() {
+  for (let i = 0; i < roadBottom.length; i++) {
+    cells[roadBottom2[i]].classList.add('road-bottom');
+  }
+}
 
 function addRoadTop() {
   for (let i = 0; i < roadTop.length; i++) {
     cells[roadTop[i]].classList.add('road-top');
+  }
+}
+function addRoadTop2() {
+  for (let i = 0; i < roadTop2.length; i++) {
+    cells[roadTop2[i]].classList.add('road-top');
   }
 }
 
@@ -179,6 +234,7 @@ function win() {
     clearInterval(intervalID);
     document.removeEventListener('keyup', handleKeyUp);
     myAudio.pause();
+    winAudio.play();
   }
 }
 // If frog position is equal to any of these cells, or if timer hits zero,
@@ -186,6 +242,8 @@ function win() {
 function lose() {
   if (
     cells[frogPosition].classList.contains('car-left') ||
+    cells[frogPosition].classList.contains('car-left2') ||
+    cells[frogPosition].classList.contains('car-right2') ||
     cells[frogPosition].classList.contains('car-right') ||
     (!cells[frogPosition].classList.contains('logs-right') &&
       cells[frogPosition].classList.contains('water-top')) ||
@@ -200,6 +258,7 @@ function lose() {
     frogPosition = 94;
     resetButton;
     myAudio.pause();
+    loseAudio.play();
   }
 }
 //* FUNCTION THAT HANDLES COUNTDOWN TIMER ==========================================================================================================================================================================================================================================================
@@ -217,7 +276,9 @@ function startGame() {
     moveLogsLeft();
     moveLogsRight();
     moveCarsRight();
+    moveCarsRight2();
     moveCarsLeft();
+    moveCarsLeft2();
     startTimer();
     win();
     lose();
@@ -281,17 +342,35 @@ document.addEventListener('click', () => {
   ribbit.play();
 });
 
+window.addEventListener(
+  'keydown',
+  function (e) {
+    if (
+      ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(
+        e.code
+      ) > -1
+    ) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+
 //* FUNCTION THAT HANDLES CALLBACKS FOR ALL NON-MOVING GRID ITEMS
 function placeGridItems() {
   placeCarsRight();
+  placeCarsRight2();
   placeCarsLeft();
+  placeCarsLeft2();
   addFrog();
   placeLogsLeft();
   placeLogsRight();
   addWaterBottom();
   addWaterTop();
   addRoadBottom();
+  addRoadBottom2();
   addRoadTop();
+  addRoadTop2();
   addGoal();
 }
 placeGridItems();
