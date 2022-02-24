@@ -15,6 +15,7 @@ h3 {
 .game-container {
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
   background: linear-gradient(#57df45, #f5f384);
@@ -26,6 +27,14 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+p {
+  display: flex;
+  margin-right: 60%;
+  font-family: sans-serif;
+  color: #fff;
+  font-size: large;
 }
 
 button {

@@ -1,11 +1,13 @@
 // * DOM ELEMENTS GO HERE ======================================================================================================================================================================
+const grid = document.querySelector('.grid');
+let hasGameStarted = false;
+const cells = [];
 const startButton = document.querySelector('#start-button');
 const resetButton = document.querySelector('#reset');
 const gameResult = document.querySelector('#result');
 const timer = document.querySelector('#timer');
-const grid = document.querySelector('.grid');
-let hasGameStarted = false;
-const cells = [];
+let myAudio = document.querySelector('#audio');
+let ribbit = document.querySelector('#audio2');
 
 // * GRID VARIABLES GO HERE ===============================================================================================================================================================
 const width = 10;
@@ -176,9 +178,11 @@ function win() {
     cells[frogPosition].classList.remove('frog');
     clearInterval(intervalID);
     document.removeEventListener('keyup', handleKeyUp);
+    myAudio.pause();
   }
 }
-
+// If frog position is equal to any of these cells, or if timer hits zero,
+// player must reset game to play
 function lose() {
   if (
     cells[frogPosition].classList.contains('car-left') ||
@@ -195,6 +199,7 @@ function lose() {
     document.removeEventListener('keyup', handleKeyUp);
     frogPosition = 94;
     resetButton;
+    myAudio.pause();
   }
 }
 //* FUNCTION THAT HANDLES COUNTDOWN TIMER ==========================================================================================================================================================================================================================================================
@@ -206,6 +211,7 @@ function startTimer() {
   timer.innerText = time;
 }
 // * START & RESET GAME FUNCTIONS ===========================================================================================================================================================================================================================================================
+
 function startGame() {
   if (hasGameStarted) {
     moveLogsLeft();
@@ -217,7 +223,6 @@ function startGame() {
     lose();
   }
 }
-
 function resetGame() {
   window.location.reload();
 }
@@ -256,7 +261,10 @@ function handleKeyUp(event) {
   addFrog(frogPosition); // * adds frog back at the new position
 }
 
-//* FUNCTION THAT WILL HANDLE START GAME BUTTON ================================================================================================================
+//* EVENT LISTENER FOR handleKeyUp FUNCTION
+document.addEventListener('keyup', handleKeyUp);
+
+//* EVENT LISTENERS THAT WILL HANDLE START GAME BUTTON AND RESET GAME FUNCTION ================================================================================================================
 startButton.addEventListener('click', () => {
   startButton.remove();
   hasGameStarted = true;
@@ -267,8 +275,11 @@ resetButton.addEventListener('click', () => {
   resetGame();
 });
 
-//* EVENT LISTENER FOR MOVE FROG
-document.addEventListener('keyup', handleKeyUp);
+//* PLAY THE AUDIO WHENEVER THE PLAYER CLICKS THE MOUSE BUTTON ====================================================================================================================================
+document.addEventListener('click', () => {
+  myAudio.play();
+  ribbit.play();
+});
 
 //* FUNCTION THAT HANDLES CALLBACKS FOR ALL NON-MOVING GRID ITEMS
 function placeGridItems() {
