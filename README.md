@@ -6,7 +6,7 @@ For my first project in the General Assembly Software Engineering Immersive Cour
 
 ### Technologies Required: HTML, CSS, JavaScript ES6+
 
-### Link to the game:
+### Link to the game: [Frogger](https://mstephanou.github.io/ga-project-1/)
 
 # Brief
 
