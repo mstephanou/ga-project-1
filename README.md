@@ -28,13 +28,13 @@ I spent most of the day planning out how i wanted tp tackle the project. I sketc
 
 Please find attached a whiteboard mock-up of how i planned to build this game, utilising the skills i have learned so far.
 
-![project 1 whiteboard](./project-1/assets/project-1-whiteboard.png)
+![project 1 whiteboard](./projects/project-1/assets/project-1-whiteboard.png)
 
 # Day 2
 
 With my MVP goals in mind, my first task was to create a grid that would be the basis for the game board, and would house all of the moving parts inside. To acheive this i created and empty array and passed that array into a forLoop, creating new divs via the DOM and then add those new divs onto the grid on each cycle.
 
-![Project 1 grid](./project-1/assets/frogger-grid.png)<br>
+![Project 1 grid](./projects/project-1/assets/frogger-grid.png)<br>
 ![Grid logic](./project-1/assets/gridlogic.png)<br>
 
 # Day 3
