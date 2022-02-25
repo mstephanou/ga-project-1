@@ -28,45 +28,45 @@ I spent most of the day planning out how i wanted tp tackle the project. I sketc
 
 Please find attached a whiteboard mock-up of how i planned to build this game, utilising the skills i have learned so far.
 
-![project 1 whiteboard](../project-1/assets/project-1-whiteboard.png)
+![project 1 whiteboard](./project-1/assets/project-1-whiteboard.png)
 
 # Day 2
 
 With my MVP goals in mind, my first task was to create a grid that would be the basis for the game board, and would house all of the moving parts inside. To acheive this i created and empty array and passed that array into a forLoop, creating new divs via the DOM and then add those new divs onto the grid on each cycle.
 
-![Project 1 grid](../project-1/assets/frogger-grid.png)<br>
-![Grid logic](../project-1/assets/gridlogic.png)<br>
+![Project 1 grid](./project-1/assets/frogger-grid.png)<br>
+![Grid logic](./project-1/assets/gridlogic.png)<br>
 
 # Day 3
 
 With my grid created, i then moved onto the first requirement for MVP - write logic for the player to move.
 To acheive this i wrote a function that handled an eventListener that ran checks on each new key press against the frogs movement.
 
-![moveFrog function](../project-1/assets/moveFrog.png)<br>
-![Frog gif](../project-1/assets/frogMoving.gif)<br>
+![moveFrog function](./project-1/assets/moveFrog.png)<br>
+![Frog gif](./project-1/assets/frogMoving.gif)<br>
 
 # Days 4 & 5
 
 These were the most challenging days for me. I had to figure out the functionality for moving the obastacles automatically whilst factoring in the collision detection for the cars, and for the water. Knowing i had to automate obstacles moving from right to left, i created functions for every row that contained cars, logs, rows and water. I had a eureka moment when i realised that i could implement similar logic used to move the frog, to my obstacles.
 
-![carsLeft logic](../project-1/assets/carsLeft.png)<br>
-![carsRight logic](../project-1/assets/carsRight.png)<br>
+![carsLeft logic](./project-1/assets/carsLeft.png)<br>
+![carsRight logic](./project-1/assets/carsRight.png)<br>
 
 # Days 6 & 7
 
 With my MVP acheived, i spent most of the days researching royalty-free sprites and .wav files to add to my game. This process i feel was not only enjoyable but important, becuase they add more depth to the players experience.
 
-# Fetaured Code
+# Featured Code
 
 ### win/lose conditions
 
 I was particularly proud of these becuase i felt they handled quite complex computations, accounting for the players movement and running concurrent checks with each keypress
 
-![win/lose conditons](../project-1/assets/win:lose.png)<br>
+![win/lose conditons](./project-1/assets/win:lose.png)<br>
 
-![Win screen](../project-1/assets/frogWin.gif)<br>
+![Win screen](./project-1/assets/frogWin.gif)<br>
 
-![Lose screen](../project-1/assets/frogLose.gif)<br>
+![Lose screen](./project-1/assets/frogLose.gif)<br>
 
 # Hurdles
 
