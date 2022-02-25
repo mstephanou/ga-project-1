@@ -19,7 +19,7 @@ let intervalID;
 let frogPosition = 94;
 let time = parseInt(timer.innerText);
 
-// * GRID CREATION GOES HERE ==========================================================================================================================================================================
+// * CREATE A GRID USING A FOR LOOP AND FOR EACH ITERATION CREATE A NEW DIV ELEMENT TO BE PUSHED ONTO THE GRID ==========================================================================================================================================================================
 
 for (let i = 0; i < cellCount; i++) {
   const cell = document.createElement('div');
