@@ -1,10 +1,10 @@
 # Project 1
 
-For my first project in the General Assembly Software Engineering Immersive Course, i was tasked to make grid-based game inspired by the classic arcade title **Frogger**, utilising the JaavaScript skills i have acquired up to this point.
+For my first project in the General Assembly Software Engineering Immersive Course, i was tasked to make grid-based game inspired by the classic arcade title **Frogger**, utilising the JavaScript skills i have acquired up to this point.
 
 ### Project Duration: 7 Days
 
-### Technologies Required: HTML, CSS, JavaScript ES6+
+### Technologies Required: HTML, CSS, JavaScript ES6
 
 ### Link to the game: [Frogger](https://mstephanou.github.io/ga-project-1/)
 
@@ -70,7 +70,7 @@ I was particularly proud of these becuase i felt they handled quite complex comp
 
 # Hurdles
 
-I faced a major hurdle preventing
+Given more time i would have added more levels with faster moving obsticles and platforms for increased difficulty.
 
 <a href="https://www.flaticon.com/free-icons/frog" title="frog icons">Frog icons created by Freepik - Flaticon</a><br>
 <a href="https://www.flaticon.com/free-icons/road" title="road icons">Road icons created by Smashicons - Flaticon</a><br>
